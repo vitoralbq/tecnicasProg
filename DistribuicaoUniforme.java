@@ -1,19 +1,22 @@
 import java.util.Random;
-public class DistribuicaoUniforme extends Distribuicao<Double> {
+public class DistribuicaoUniforme extends Distribuicao {
+    private double a;
+    private double b;
     private Random random;
-    private double min;
-    private double max;
 
-    public DistribuicaoUniforme(double minimo, double maximo) {
-        super((minimo + maximo) / 2, Math.pow((maximo - minimo), 2) / 12);
-        min = minimo;
-        max = maximo;
+    public DistribuicaoUniforme(double a, double b) {
+        this.a = a;
+        this.b = b;
         this.random = new Random();
     }
 
     @Override
-    public Double getNumeros() {
-        return min + (max - min) * random.nextDouble();
+    public double[] getNumeros(int n) {
+        double[] valores = new double[n];
+        for (int i = 0; i < n; i++) {
+            valores[i] = a + (b - a) * random.nextDouble();
+        }
+        return valores;
     }
 }
 

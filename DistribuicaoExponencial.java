@@ -1,15 +1,20 @@
 import java.util.Random;
 
-public class DistribuicaoExponencial extends Distribuicao<Double> {
+public class DistribuicaoExponencial extends Distribuicao<double[]> {
     private Random random;
+    private double lambda;
 
     public DistribuicaoExponencial(double lambda) {
-        super(1 / lambda, 1 / (lambda * lambda));
+        this.lambda = lambda;
         this.random = new Random();
     }
 
     @Override
-    public Double getNumeros() {
-        return -Math.log(1 - random.nextDouble()) / (1 / media);
+    public double[] getNumeros(int n) {
+        double[] valores = new double[n];
+        for (int i = 0; i < n; i++) {
+            valores[i] = Math.log(1 - random.nextDouble()) / (-lambda);
+        }
+        return valores;
     }
 }

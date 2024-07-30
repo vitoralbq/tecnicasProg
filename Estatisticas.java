@@ -1,31 +1,36 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Estatisticas<T extends Distribuicao<?>> {
+public class Estatisticas<T extends Distribuicao> {
     private T distribuicao;
 
     public Estatisticas(T distribuicao) {
+
         this.distribuicao = distribuicao;
     }
 
     public void imprimirValoresGerados(int n) {
-        List<String> valores = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            valores.add(distribuicao.getNumeros().toString());
+        double[] valores = (double[]) distribuicao.getNumeros(n);
+        for (double valor : valores) {
+            System.out.print(valor + ", ");
         }
-        System.out.println(String.join(", ", valores));
+        System.out.println();
     }
 
     public void imprimirMedia() {
-        System.out.println("Média: " + distribuicao.getMedia());
+        double[] valores = (double[]) distribuicao.getNumeros(1000);
+        double media = distribuicao.getMedia(valores);
+        System.out.println("Média: " + media);
     }
 
     public void imprimirVariancia() {
-        System.out.println("Variância: " + distribuicao.getVariancia());
+        double[] valores = (double[]) distribuicao.getNumeros(1000);
+        double variancia = distribuicao.getVariancia(valores);
+        System.out.println("Variância: " + variancia);
     }
 
-    public void imprimirDP() {
-        System.out.println("Desvio Padrão: " + distribuicao.getDP());
-    }
+    /*FINÇÃO DE IMPRIMIR O DESVIO PADRAO
+
+    }*/
 }
 

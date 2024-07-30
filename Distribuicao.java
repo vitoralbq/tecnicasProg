@@ -1,23 +1,32 @@
+import java.util.Random;
 public abstract class Distribuicao<T> {
-    protected double media;
-    protected double variancia;
+    public double media;
+    public double variancia;
+    public double dp;
+    public Random random;
 
-    public Distribuicao(double Media, double Variancia) {
-        media = Media;
-        variancia = Variancia;
+
+
+    public abstract T getNumeros(int n);
+
+
+
+    public double getMedia(double[] valores) {
+        double soma = 0;
+        for (double valor : valores) {
+            soma += valor;
+        }
+        return soma / valores.length;
     }
 
-    public abstract T getNumeros();
 
-    public double getMedia() {
-        return media;
+    public double getVariancia(double[] valores) {
+        double media = getMedia(valores);
+        double soma = 0;
+        for (double valor : valores) {
+            soma += Math.pow(valor - media, 2);
+        }
+        return soma / valores.length;
     }
 
-    public double getVariancia() {
-        return variancia;
-    }
-
-    public double getDP() {
-        return Math.sqrt(variancia);
-    }
 }
